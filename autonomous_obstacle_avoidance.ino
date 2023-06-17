@@ -16,6 +16,7 @@
 NewPing sonar(TRIG_PIN, ECHO_PIN, MAX_DISTANCE);
 
 void setup() {
+  // Set pin modes for motor control
   pinMode(IN1_PIN, OUTPUT);
   pinMode(IN2_PIN, OUTPUT);
   pinMode(IN3_PIN, OUTPUT);
@@ -23,6 +24,7 @@ void setup() {
   pinMode(ENA_PIN, OUTPUT);
   pinMode(ENB_PIN, OUTPUT);
   
+  // Set initial motor control states
   digitalWrite(IN1_PIN, LOW);
   digitalWrite(IN2_PIN, LOW);
   digitalWrite(IN3_PIN, LOW);
@@ -30,10 +32,12 @@ void setup() {
   digitalWrite(ENA_PIN, LOW);
   digitalWrite(ENB_PIN, LOW);
   
+  // Start serial communication
   Serial.begin(9600);
 }
 
 void moveForward() {
+  // Move the car forward
   analogWrite(ENA_PIN, CAR_SPEED);
   analogWrite(ENB_PIN, CAR_SPEED);
   digitalWrite(IN1_PIN, HIGH);
@@ -44,6 +48,7 @@ void moveForward() {
 }
 
 void moveRight() {
+  // Turn the car right
   digitalWrite(IN1_PIN, LOW);
   digitalWrite(IN2_PIN, HIGH);
   digitalWrite(IN3_PIN, LOW);
@@ -54,6 +59,7 @@ void moveRight() {
 }
 
 void moveLeft() {
+  // Turn the car left
   digitalWrite(IN1_PIN, LOW);
   digitalWrite(IN2_PIN, LOW);
   digitalWrite(IN3_PIN, LOW);
@@ -64,6 +70,7 @@ void moveLeft() {
 }
 
 void stopCar() {
+  // Stop the car
   digitalWrite(IN1_PIN, LOW);
   digitalWrite(IN2_PIN, LOW);
   digitalWrite(IN3_PIN, LOW);
@@ -72,6 +79,7 @@ void stopCar() {
 }
 
 void loop() {
+  // Measure the distance using the ultrasonic sensor
   unsigned int distance = sonar.ping_cm();
   Serial.print("Distance: ");
   Serial.print(distance);
